@@ -1,0 +1,25 @@
+아이디 존재 여부 API (/api/member/checkemail)  
+■ request
+   - method: post
+   - params:
+         - email = 이메일주소
+  
+■ response:  
+   - 200: 성공  
+      - case1. 이메일이 존재할 때 return : true  
+      - case2. 이메일이 존재하지 않을 때 return : false  
+  
+  
+■ 실제동작코드  
+MemberController.java  
+```java
+@PostMapping("/checkemail")
+public ResponseEntity<JSONResult> checkEmail(@RequestBody MemberVo vo) {
+  Boolean exist = memberService.existEmail(vo);
+  return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(exist));
+}
+```
+  
+■ TC CODE  
+  
+ <tc code>
