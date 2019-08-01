@@ -1,0 +1,24 @@
+상위옵션 삭제 API (/api/option/parent/{no})  
+■ request
+   - method: delete
+   - params:
+      - no = 번호  
+  
+■ response:  
+   - 200: 성공  
+      - case1. return : true (삭제성공)  
+      - case1. return : false (해당번호없음)  
+  
+■ 실제동작코드  
+ProductOptionController.java  
+```java
+@DeleteMapping("/parent/{no}")
+public ResponseEntity<JSONResult> deleteParent(@PathVariable Long no) {
+  Boolean result = productOptionService.deleteOptionParent(no);
+  return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(result));
+}
+```
+  
+■ TC CODE  
+  
+ <tc code>
