@@ -1,0 +1,39 @@
+아이디 존재 여부 API (/api/member/checkid)  
+■ request
+   - method: post
+   - params:
+         - id = 아이디
+         - password = 비밀번호
+         - name = 이름
+         - type = 분류
+         - birth = 생년월일
+         - gender = 성별
+         - email = 이메일
+         - phone = 전화번호
+         - address = 주소
+  
+■ response:  
+   - 200: 성공  
+      - case1. return : 회원번호  
+   - 400: 실패
+      - case1. 양식에 맞지 않는 값을 입력했을때  
+  
+■ 실제동작코드  
+MemberController.java  
+```java
+@PostMapping("")
+public ResponseEntity<JSONResult> join(@RequestBody @Valid MemberVo vo, BindingResult bindResult) {
+  if(bindResult.hasErrors()) {
+    List<ObjectError> list = bindResult.getAllErrors();
+    for(ObjectError error : list) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(JSONResult.fail(error.getDefaultMessage()));
+    }
+  }
+  Long no = memberService.join(vo);
+      return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(no));
+}
+```
+  
+■ TC CODE  
+  
+ <tc code>
