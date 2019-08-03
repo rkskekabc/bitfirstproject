@@ -1,0 +1,25 @@
+장바구니에서 제거 API (/api/cart/)  
+■ request
+   - method: delete
+   - params:
+      - memberNo = 사용자번호  
+      - optionDetailNo = 상세옵션번호  
+  
+■ response:  
+   - 200: 성공  
+      - case1. return : true (제거 성공)  
+      - case2. return : false (사용자번호 or 상세옵션번호 존재하지 않음)  
+  
+■ 실제동작코드  
+CartController.java  
+```java
+@DeleteMapping("")
+public ResponseEntity<JSONResult> deleteFromCart(@RequestBody CartVo vo){
+  Integer result = cartService.removeProduct(vo);
+  return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(result));
+}
+```
+  
+■ TC CODE  
+  
+ <tc code>
