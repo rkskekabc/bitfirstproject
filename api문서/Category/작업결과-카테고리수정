@@ -1,0 +1,23 @@
+카테고리수정 API (/api/option/category/{no})  
+■ request
+   - method: put
+   - params:
+      - no = 카테고리번호  
+  
+■ response:  
+   - 200: 성공  
+      - case1. return : 카테고리번호  
+  
+■ 실제동작코드  
+CategoryController.java  
+```java
+@PutMapping("/{no}")
+public ResponseEntity<JSONResult> update(@PathVariable Long no, @RequestBody CategoryVo vo) {
+  Long returnNo = categoryService.update(no, vo);
+  return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(returnNo));
+}
+```
+  
+■ TC CODE  
+  
+ <tc code>
