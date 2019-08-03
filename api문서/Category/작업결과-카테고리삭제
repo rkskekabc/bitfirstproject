@@ -1,0 +1,24 @@
+카테고리삭제 API (/api/option/category/{no})  
+■ request
+   - method: delete
+   - params:
+      - no = 카테고리번호  
+  
+■ response:  
+   - 200: 성공  
+      - case1. return : true (삭제 성공)  
+      - case2. return : false (번호가 존재하지 않음)  
+  
+■ 실제동작코드  
+CategoryController.java  
+```java
+@DeleteMapping("/{no}")
+public ResponseEntity<JSONResult> delete(@PathVariable Long no) {
+  Boolean result = categoryService.delete(no);
+  return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(result));
+}
+```
+  
+■ TC CODE  
+  
+ <tc code>
