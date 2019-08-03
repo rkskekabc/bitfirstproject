@@ -1,0 +1,23 @@
+상품상세보기 API (/api/option/product/{no})  
+■ request
+   - method: get
+   - params:
+      - no = 상품번호  
+  
+■ response:  
+   - 200: 성공  
+      - case1. return : 상품정보  
+  
+■ 실제동작코드  
+CategoryController.java  
+```java
+@GetMapping(value="/{no}")
+public ResponseEntity<JSONResult> productDetail(@PathVariable Long no) {
+  ProductVo vo = productService.get(no);
+  return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(vo));
+}
+```
+  
+■ TC CODE  
+  
+ <tc code>
