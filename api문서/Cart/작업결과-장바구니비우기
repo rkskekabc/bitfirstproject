@@ -1,0 +1,24 @@
+장바구니비우기 API (/api/cart/{memberNo})  
+■ request
+   - method: delete
+   - params:
+      - memberNo = 사용자번호  
+  
+■ response:  
+   - 200: 성공  
+      - case1. return : true (제거 성공)  
+      - case2. return : false (사용자번호 없음)  
+  
+■ 실제동작코드  
+CartController.java  
+```java
+@DeleteMapping("/{memberNo}")
+public ResponseEntity<JSONResult> removeCart(@PathVariable Long memberNo){
+  Integer result = cartService.removeCart(memberNo);
+  return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(result));
+}
+```
+  
+■ TC CODE  
+  
+ <tc code>
